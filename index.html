@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+    <title>Quiz Questions</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery/.min.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $("#but1").click(function()
+            {
+                $(".rb").show();
+                $(".rb").attr("disabled",TRUE);
+
+
+            });
+        });
+        function getanswers()
+        {
+            document.getElementById(UserAnswers).innerHTML="";
+            var e = document.getElementsByTagName("input");
+            for(i=0;i<=e.length;i++)
+            {
+                if(e[i].type=="radio")
+                {
+                    if(e[i].checked)
+                    {
+                        document.getElementById(UserAnswers).innerHTML+= "Q "+e[i].name+" The answer your are selected is:"+e[i].value+"<br/";
+
+                    }
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <center>
+        <h1> Quiz Questions </h1>
+    </center>
+        <div style = 'padding-left: 30px;'> 
+            { % for result in %} 
+    
+        <input type="radio">
+            {% for result in Exam% }
+            <table>
+                <tr>
+                    <td>
+                        {{result.id}} , {{result.Question}} ? 
+                    </td>
+                </tr>
+                <tr>
+                    <td> <input type="radio" id="Option1" name="{{result.id}}" value="{{result.Option1}}"></td>
+                </tr>
+
+                <tr>
+                    <td> <input type="radio" id="Option2" name="{{result.id}}" value="{{result.Option2}}"></td>
+                </tr>
+
+                <tr>
+                    <td> <input type='radio' id="Option3" name="{{result.id}}" value="{{result.Option3}}"></td>
+                </tr>
+
+                <tr>
+                    <td> <input type="radio" id="Option4" name="{{result.id}}" value="{{result.Option4}}"></td>
+                </tr>
+
+                <tr>
+                    <td> input<label id = 'Corrans' class ="rb style="display: none: green;"><b>{{result.Corrans}}</b></td>
+                </tr>
+                <hr/>
+                
+                
+
+            </table>
+            {% endfor %}
+            
+            <hr>
+            <input type="submit" value="Click for Results" id = 'but1' onclick='getanswer();'/>
+        </hr>
+            <b id="UserAnswers"></b>
+                          
+    </div> 
+    
+</body>
+</html>
